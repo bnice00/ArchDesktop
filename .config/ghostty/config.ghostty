@@ -1,0 +1,10 @@
+# --- Appearance ---
+#theme = "Lavandula"
+#theme = "Dracula"
+theme = "TokyoNight Night"
+font-family = "JetBrainsMonoNL Nerd Font"
+font-size = 14
+# --- Cursor ---
+cursor-style = "block"
+
+scrollback-limit = 20000

@@ -1,0 +1,112 @@
+/* ── BeachBum Waybar · dark glass ─────────────────────────────── */
+
+@define-color glass      rgba(8, 9, 12, 0.78);     /* module background   */
+@define-color glass-hi   rgba(26, 28, 36, 0.88);   /* hover               */
+@define-color edge       rgba(255, 255, 255, 0.06);/* hairline border     */
+@define-color fg         #d8dee9;
+@define-color dim        #7b8496;
+@define-color accent     #7aa2f7;                  /* swap for your color */
+@define-color ok         #9ece6a;
+@define-color warn       #e0af68;
+@define-color crit       #f7768e;
+
+* {
+  font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+}
+
+/* Bar itself is fully see-through — only the pills have glass */
+window#waybar {
+  background: transparent;
+  color: @fg;
+}
+
+tooltip {
+  background: rgba(12, 14, 18, 0.92);
+  border: 1px solid @edge;
+  border-radius: 10px;
+}
+tooltip label { color: @fg; padding: 4px; }
+
+/* ── Pills ─────────────────────────────────────────────────────── */
+.modules-left > widget > *,
+.modules-center > widget > *,
+.modules-right > widget > * {
+  background: @glass;
+  border: 1px solid @edge;
+  border-radius: 16px;
+  padding: 3px 18px;
+  margin: 8px 5px;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.modules-left   { margin-left: 8px; }
+.modules-right  { margin-right: 8px; }
+
+#clock:hover, #cpu:hover, #memory:hover, #network:hover,
+#pulseaudio:hover, #battery:hover, #backlight:hover {
+  background: @glass-hi;
+}
+
+/* ── Workspaces ────────────────────────────────────────────────── */
+#workspaces { padding: 2px 6px; }
+
+#workspaces button {
+  color: @dim;
+  background: transparent;
+  padding: 0 11px;
+  margin: 3px 2px;
+  border-radius: 12px;
+  transition: all 200ms ease;
+}
+#workspaces button:hover {
+  color: @fg;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: none;
+}
+#workspaces button.active,
+#workspaces button.focused {
+  color: @accent;
+  background: rgba(122, 162, 247, 0.15);
+}
+#workspaces button.urgent { color: @crit; }
+
+/* ── Per-module color ──────────────────────────────────────────── */
+#clock      { color: @accent; }
+#cpu        { color: @ok; }
+#memory     { color: @warn; }
+#network    { color: @accent; }
+#pulseaudio { color: @fg; }
+#backlight  { color: @warn; }
+#battery    { color: @ok; }
+#window     { color: @dim; font-weight: 500; }
+
+#network.disconnected,
+#pulseaudio.muted   { color: @dim; }
+
+#battery.charging   { color: @accent; }
+#battery.warning:not(.charging)  { color: @warn; }
+#battery.critical:not(.charging) {
+  color: @crit;
+  animation: blink 1s steps(2) infinite;
+}
+@keyframes blink { to { color: @fg; } }
+
+#cpu.high, #memory.high { color: @crit; }
+
+/* Hide empty title pill when no window is focused */
+window#waybar.empty #window { background: transparent; border: none; }
+
+/* Sway binding mode (resize, etc.) — only visible while active */
+#mode {
+  color: #11131a;
+  background: @warn;
+  border-color: @warn;
+}
+
+#tray { padding: 2px 12px; }
+#tray > .needs-attention { background: @crit; border-radius: 6px; }

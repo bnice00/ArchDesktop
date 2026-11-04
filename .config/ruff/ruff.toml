@@ -1,0 +1,14 @@
+line-length = 100
+
+[lint]
+select = [
+  "E", "W",   # pycodestyle: style errors and warnings
+  "F",        # pyflakes: unused imports, undefined names
+  "I",        # isort: import ordering
+  "B",        # bugbear: likely bugs and footguns
+  "UP",       # pyupgrade: outdated syntax
+  "SIM",      # simplify: overcomplicated code
+  "N",        # pep8-naming: naming conventions
+  "PL",       # pylint rules: design smells, too many branches
+  "C90",      # complexity: functions that do too much
+]

@@ -1,0 +1,8 @@
+blesh-git
+brave-bin
+claude-code
+claude-desktop
+feishin-bin
+orca-slicer-bin
+yay
+yay-debug
